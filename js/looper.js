@@ -14,16 +14,16 @@ var looper = {};
             if(defaultDuration){
                 var now = Date.now();
                 var loopStart = now - ((now - startTime) % defaultDuration);
-                currentLine = makeLine(defaultDuration, loopStart);
+                currentLine = makeLine(e.point, defaultDuration, loopStart);
             }else{
-                currentLine = makeLine();
+                currentLine = makeLine(e.point);
             }
         };
         t.onMouseDrag = function(e){
             currentLine.pushSegment(e.point, Date.now());
         };
         t.onMouseUp = function(e){ 
-            currentLine.pushSegment(e.point, Date.now());
+            currentLine.end(e.point, Date.now());
             lines.push(currentLine);
             currentLine = null;
         };
